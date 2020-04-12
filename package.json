@@ -1,11 +1,23 @@
 {
   "name": "react-openmoji",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "openmoji for react",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "drinking-code",
-  "license": "CC-BY-SA-4.0"
+  "license": "CC-BY-SA-4.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drinking-code/openmoji-for-react.git"
+  },
+  "keywords": [
+    "openmoji",
+    "react"
+  ],
+  "bugs": {
+    "url": "https://github.com/drinking-code/openmoji-for-react/issues"
+  },
+  "homepage": "https://github.com/drinking-code/openmoji-for-react#readme"
 }

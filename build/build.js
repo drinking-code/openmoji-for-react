@@ -98,7 +98,7 @@ export default ${iconName};
     });
 
     // write to index 'export {default as <ICON-NAME>, default as <HEXCODE>} from <PATH/TO/ICON-SCRIPT>'
-    indexJS += `export {default as ${iconName}, default as _${icon.hexcode}} from './icons/${icon.hexcode}'\n`;
+    indexJS += `export {default as ${iconName}, default as _${icon.hexcode.replace('-', '_')}} from './icons/${icon.hexcode}'\n`;
 });
 
 // write to index 'export function replaceEmojis'

@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:WesternSahara = (size) => {
+const Flag_WesternSahara = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -21,5 +21,5 @@ const Flag:WesternSahara = (size) => {
     );
 };
 
-export default Flag:WesternSahara;
+export default Flag_WesternSahara;
     

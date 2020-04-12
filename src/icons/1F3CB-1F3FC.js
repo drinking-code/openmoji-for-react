@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const PersonLiftingWeights:MediumLightSkinTone = (size) => {
+const PersonLiftingWeights_MediumLightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -31,5 +31,5 @@ const PersonLiftingWeights:MediumLightSkinTone = (size) => {
     );
 };
 
-export default PersonLiftingWeights:MediumLightSkinTone;
+export default PersonLiftingWeights_MediumLightSkinTone;
     

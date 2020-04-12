@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:Turkmenistan = (size) => {
+const Flag_Turkmenistan = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -33,5 +33,5 @@ const Flag:Turkmenistan = (size) => {
     );
 };
 
-export default Flag:Turkmenistan;
+export default Flag_Turkmenistan;
     

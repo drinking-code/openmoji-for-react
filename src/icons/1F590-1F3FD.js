@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const HandWithFingersSplayed:MediumSkinTone = (size) => {
+const HandWithFingersSplayed_MediumSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -19,5 +19,5 @@ const HandWithFingersSplayed:MediumSkinTone = (size) => {
     );
 };
 
-export default HandWithFingersSplayed:MediumSkinTone;
+export default HandWithFingersSplayed_MediumSkinTone;
     

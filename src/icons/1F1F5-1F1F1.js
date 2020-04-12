@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:Poland = (size) => {
+const Flag_Poland = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -17,5 +17,5 @@ const Flag:Poland = (size) => {
     );
 };
 
-export default Flag:Poland;
+export default Flag_Poland;
     

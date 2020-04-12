@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const IndexPointingUp:MediumSkinTone = (size) => {
+const IndexPointingUp_MediumSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -32,5 +32,5 @@ const IndexPointingUp:MediumSkinTone = (size) => {
     );
 };
 
-export default IndexPointingUp:MediumSkinTone;
+export default IndexPointingUp_MediumSkinTone;
     

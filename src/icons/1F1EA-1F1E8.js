@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:Ecuador = (size) => {
+const Flag_Ecuador = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -25,5 +25,5 @@ const Flag:Ecuador = (size) => {
     );
 };
 
-export default Flag:Ecuador;
+export default Flag_Ecuador;
     

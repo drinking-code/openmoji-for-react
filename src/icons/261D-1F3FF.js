@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const IndexPointingUp:DarkSkinTone = (size) => {
+const IndexPointingUp_DarkSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -32,5 +32,5 @@ const IndexPointingUp:DarkSkinTone = (size) => {
     );
 };
 
-export default IndexPointingUp:DarkSkinTone;
+export default IndexPointingUp_DarkSkinTone;
     

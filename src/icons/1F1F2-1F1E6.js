@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:Morocco = (size) => {
+const Flag_Morocco = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -17,5 +17,5 @@ const Flag:Morocco = (size) => {
     );
 };
 
-export default Flag:Morocco;
+export default Flag_Morocco;
     

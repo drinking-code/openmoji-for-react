@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:Tanzania = (size) => {
+const Flag_Tanzania = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -18,5 +18,5 @@ const Flag:Tanzania = (size) => {
     );
 };
 
-export default Flag:Tanzania;
+export default Flag_Tanzania;
     

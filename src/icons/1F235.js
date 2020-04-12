@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Japanese“noVacancy”Button = (size) => {
+const JapaneseNoVacancyButton = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -40,5 +40,5 @@ const Japanese“noVacancy”Button = (size) => {
     );
 };
 
-export default Japanese“noVacancy”Button;
+export default JapaneseNoVacancyButton;
     

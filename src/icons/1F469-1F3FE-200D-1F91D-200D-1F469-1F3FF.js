@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const WomenHoldingHands:MediumDarkSkinTone,DarkSkinTone = (size) => {
+const WomenHoldingHands_MediumDarkSkinToneDarkSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" x="0" y="0" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -33,5 +33,5 @@ const WomenHoldingHands:MediumDarkSkinTone,DarkSkinTone = (size) => {
     );
 };
 
-export default WomenHoldingHands:MediumDarkSkinTone,DarkSkinTone;
+export default WomenHoldingHands_MediumDarkSkinToneDarkSkinTone;
     

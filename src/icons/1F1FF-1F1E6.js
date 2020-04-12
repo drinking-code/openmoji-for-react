@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:SouthAfrica = (size) => {
+const Flag_SouthAfrica = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -19,5 +19,5 @@ const Flag:SouthAfrica = (size) => {
     );
 };
 
-export default Flag:SouthAfrica;
+export default Flag_SouthAfrica;
     

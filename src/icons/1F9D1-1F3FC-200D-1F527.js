@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Mechanic:MediumLightSkinTone = (size) => {
+const Mechanic_MediumLightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" x="0" y="0" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -40,5 +40,5 @@ const Mechanic:MediumLightSkinTone = (size) => {
     );
 };
 
-export default Mechanic:MediumLightSkinTone;
+export default Mechanic_MediumLightSkinTone;
     

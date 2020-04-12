@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Family:Woman,Woman,Girl = (size) => {
+const Family_WomanWomanGirl = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" x="0" y="0" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -44,5 +44,5 @@ const Family:Woman,Woman,Girl = (size) => {
     );
 };
 
-export default Family:Woman,Woman,Girl;
+export default Family_WomanWomanGirl;
     

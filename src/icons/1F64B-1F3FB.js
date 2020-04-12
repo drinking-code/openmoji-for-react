@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const PersonRaisingHand:LightSkinTone = (size) => {
+const PersonRaisingHand_LightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -33,5 +33,5 @@ const PersonRaisingHand:LightSkinTone = (size) => {
     );
 };
 
-export default PersonRaisingHand:LightSkinTone;
+export default PersonRaisingHand_LightSkinTone;
     

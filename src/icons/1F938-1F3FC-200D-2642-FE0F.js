@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const ManCartwheeling:MediumLightSkinTone = (size) => {
+const ManCartwheeling_MediumLightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -20,5 +20,5 @@ const ManCartwheeling:MediumLightSkinTone = (size) => {
     );
 };
 
-export default ManCartwheeling:MediumLightSkinTone;
+export default ManCartwheeling_MediumLightSkinTone;
     

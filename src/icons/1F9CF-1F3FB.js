@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const DeafPerson:LightSkinTone = (size) => {
+const DeafPerson_LightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -37,5 +37,5 @@ const DeafPerson:LightSkinTone = (size) => {
     );
 };
 
-export default DeafPerson:LightSkinTone;
+export default DeafPerson_LightSkinTone;
     

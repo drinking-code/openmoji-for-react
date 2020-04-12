@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const WomanPlayingHandball:LightSkinTone = (size) => {
+const WomanPlayingHandball_LightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -25,5 +25,5 @@ const WomanPlayingHandball:LightSkinTone = (size) => {
     );
 };
 
-export default WomanPlayingHandball:LightSkinTone;
+export default WomanPlayingHandball_LightSkinTone;
     

@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Keycap:7 = (size) => {
+const Keycap_7 = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -17,5 +17,5 @@ const Keycap:7 = (size) => {
     );
 };
 
-export default Keycap:7;
+export default Keycap_7;
     

@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const ManFactoryWorker:LightSkinTone = (size) => {
+const ManFactoryWorker_LightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" x="0" y="0" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -49,5 +49,5 @@ const ManFactoryWorker:LightSkinTone = (size) => {
     );
 };
 
-export default ManFactoryWorker:LightSkinTone;
+export default ManFactoryWorker_LightSkinTone;
     

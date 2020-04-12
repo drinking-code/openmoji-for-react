@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const ManClimbing:MediumLightSkinTone = (size) => {
+const ManClimbing_MediumLightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -28,5 +28,5 @@ const ManClimbing:MediumLightSkinTone = (size) => {
     );
 };
 
-export default ManClimbing:MediumLightSkinTone;
+export default ManClimbing_MediumLightSkinTone;
     

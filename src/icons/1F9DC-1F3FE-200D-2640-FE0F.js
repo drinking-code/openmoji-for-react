@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Mermaid:MediumDarkSkinTone = (size) => {
+const Mermaid_MediumDarkSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -49,5 +49,5 @@ const Mermaid:MediumDarkSkinTone = (size) => {
     );
 };
 
-export default Mermaid:MediumDarkSkinTone;
+export default Mermaid_MediumDarkSkinTone;
     

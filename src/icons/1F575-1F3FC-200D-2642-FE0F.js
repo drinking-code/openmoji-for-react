@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const ManDetective:MediumLightSkinTone = (size) => {
+const ManDetective_MediumLightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -51,5 +51,5 @@ const ManDetective:MediumLightSkinTone = (size) => {
     );
 };
 
-export default ManDetective:MediumLightSkinTone;
+export default ManDetective_MediumLightSkinTone;
     

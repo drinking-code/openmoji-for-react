@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Cook:DarkSkinTone = (size) => {
+const Cook_DarkSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" x="0" y="0" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -39,5 +39,5 @@ const Cook:DarkSkinTone = (size) => {
     );
 };
 
-export default Cook:DarkSkinTone;
+export default Cook_DarkSkinTone;
     

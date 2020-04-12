@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Foot:MediumSkinTone = (size) => {
+const Foot_MediumSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -21,5 +21,5 @@ const Foot:MediumSkinTone = (size) => {
     );
 };
 
-export default Foot:MediumSkinTone;
+export default Foot_MediumSkinTone;
     

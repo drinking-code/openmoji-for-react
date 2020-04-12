@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const ThumbsUp:MediumDarkSkinTone = (size) => {
+const ThumbsUp_MediumDarkSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -25,5 +25,5 @@ const ThumbsUp:MediumDarkSkinTone = (size) => {
     );
 };
 
-export default ThumbsUp:MediumDarkSkinTone;
+export default ThumbsUp_MediumDarkSkinTone;
     

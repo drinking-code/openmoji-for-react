@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const HealthWorker:MediumLightSkinTone = (size) => {
+const HealthWorker_MediumLightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -38,5 +38,5 @@ const HealthWorker:MediumLightSkinTone = (size) => {
     );
 };
 
-export default HealthWorker:MediumLightSkinTone;
+export default HealthWorker_MediumLightSkinTone;
     

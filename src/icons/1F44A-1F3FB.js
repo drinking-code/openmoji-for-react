@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const OncomingFist:LightSkinTone = (size) => {
+const OncomingFist_LightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -45,5 +45,5 @@ const OncomingFist:LightSkinTone = (size) => {
     );
 };
 
-export default OncomingFist:LightSkinTone;
+export default OncomingFist_LightSkinTone;
     

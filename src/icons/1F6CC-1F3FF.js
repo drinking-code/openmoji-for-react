@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const PersonInBed:DarkSkinTone = (size) => {
+const PersonInBed_DarkSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -30,5 +30,5 @@ const PersonInBed:DarkSkinTone = (size) => {
     );
 };
 
-export default PersonInBed:DarkSkinTone;
+export default PersonInBed_DarkSkinTone;
     

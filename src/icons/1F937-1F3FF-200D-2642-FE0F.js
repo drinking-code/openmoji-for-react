@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const ManShrugging:DarkSkinTone = (size) => {
+const ManShrugging_DarkSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -36,5 +36,5 @@ const ManShrugging:DarkSkinTone = (size) => {
     );
 };
 
-export default ManShrugging:DarkSkinTone;
+export default ManShrugging_DarkSkinTone;
     

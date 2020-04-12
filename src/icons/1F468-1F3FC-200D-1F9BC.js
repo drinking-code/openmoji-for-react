@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const ManInMotorizedWheelchair:MediumLightSkinTone = (size) => {
+const ManInMotorizedWheelchair_MediumLightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -33,5 +33,5 @@ const ManInMotorizedWheelchair:MediumLightSkinTone = (size) => {
     );
 };
 
-export default ManInMotorizedWheelchair:MediumLightSkinTone;
+export default ManInMotorizedWheelchair_MediumLightSkinTone;
     

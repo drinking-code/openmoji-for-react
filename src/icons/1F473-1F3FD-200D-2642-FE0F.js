@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const ManWearingTurban:MediumSkinTone = (size) => {
+const ManWearingTurban_MediumSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -46,5 +46,5 @@ const ManWearingTurban:MediumSkinTone = (size) => {
     );
 };
 
-export default ManWearingTurban:MediumSkinTone;
+export default ManWearingTurban_MediumSkinTone;
     

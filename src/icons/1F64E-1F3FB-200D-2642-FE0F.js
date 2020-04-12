@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const ManPouting:LightSkinTone = (size) => {
+const ManPouting_LightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -27,5 +27,5 @@ const ManPouting:LightSkinTone = (size) => {
     );
 };
 
-export default ManPouting:LightSkinTone;
+export default ManPouting_LightSkinTone;
     

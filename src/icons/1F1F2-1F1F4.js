@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:MacaoSARChina = (size) => {
+const Flag_MacaoSARChina = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -33,5 +33,5 @@ const Flag:MacaoSARChina = (size) => {
     );
 };
 
-export default Flag:MacaoSARChina;
+export default Flag_MacaoSARChina;
     

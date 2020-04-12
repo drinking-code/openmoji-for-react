@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:Jersey = (size) => {
+const Flag_Jersey = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -23,5 +23,5 @@ const Flag:Jersey = (size) => {
     );
 };
 
-export default Flag:Jersey;
+export default Flag_Jersey;
     

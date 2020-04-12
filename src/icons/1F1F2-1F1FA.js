@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:Mauritius = (size) => {
+const Flag_Mauritius = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -19,5 +19,5 @@ const Flag:Mauritius = (size) => {
     );
 };
 
-export default Flag:Mauritius;
+export default Flag_Mauritius;
     

@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const ManSurfing:MediumLightSkinTone = (size) => {
+const ManSurfing_MediumLightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -27,5 +27,5 @@ const ManSurfing:MediumLightSkinTone = (size) => {
     );
 };
 
-export default ManSurfing:MediumLightSkinTone;
+export default ManSurfing_MediumLightSkinTone;
     

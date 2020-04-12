@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const PersonGolfing:LightSkinTone = (size) => {
+const PersonGolfing_LightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -29,5 +29,5 @@ const PersonGolfing:LightSkinTone = (size) => {
     );
 };
 
-export default PersonGolfing:LightSkinTone;
+export default PersonGolfing_LightSkinTone;
     

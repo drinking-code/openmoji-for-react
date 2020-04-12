@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const HorseRacing:MediumLightSkinTone = (size) => {
+const HorseRacing_MediumLightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -38,5 +38,5 @@ const HorseRacing:MediumLightSkinTone = (size) => {
     );
 };
 
-export default HorseRacing:MediumLightSkinTone;
+export default HorseRacing_MediumLightSkinTone;
     

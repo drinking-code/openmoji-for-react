@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:Rwanda = (size) => {
+const Flag_Rwanda = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -19,5 +19,5 @@ const Flag:Rwanda = (size) => {
     );
 };
 
-export default Flag:Rwanda;
+export default Flag_Rwanda;
     

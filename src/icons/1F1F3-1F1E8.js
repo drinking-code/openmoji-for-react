@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:NewCaledonia = (size) => {
+const Flag_NewCaledonia = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -27,5 +27,5 @@ const Flag:NewCaledonia = (size) => {
     );
 };
 
-export default Flag:NewCaledonia;
+export default Flag_NewCaledonia;
     

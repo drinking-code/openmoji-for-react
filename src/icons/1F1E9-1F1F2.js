@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:Dominica = (size) => {
+const Flag_Dominica = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -42,5 +42,5 @@ const Flag:Dominica = (size) => {
     );
 };
 
-export default Flag:Dominica;
+export default Flag_Dominica;
     

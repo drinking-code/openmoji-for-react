@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:Kiribati = (size) => {
+const Flag_Kiribati = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -28,5 +28,5 @@ const Flag:Kiribati = (size) => {
     );
 };
 
-export default Flag:Kiribati;
+export default Flag_Kiribati;
     

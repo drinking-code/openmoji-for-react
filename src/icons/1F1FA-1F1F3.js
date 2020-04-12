@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Flag:UnitedNations = (size) => {
+const Flag_UnitedNations = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -42,5 +42,5 @@ const Flag:UnitedNations = (size) => {
     );
 };
 
-export default Flag:UnitedNations;
+export default Flag_UnitedNations;
     

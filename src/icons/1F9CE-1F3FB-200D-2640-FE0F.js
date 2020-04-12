@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const WomanKneeling:LightSkinTone = (size) => {
+const WomanKneeling_LightSkinTone = (size) => {
     if (!size) size = '1.2em';
     return (
         <svg width={size} height={size} id="emoji" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
@@ -24,5 +24,5 @@ const WomanKneeling:LightSkinTone = (size) => {
     );
 };
 
-export default WomanKneeling:LightSkinTone;
+export default WomanKneeling_LightSkinTone;
     

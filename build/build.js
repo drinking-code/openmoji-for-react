@@ -74,29 +74,35 @@ clearDir = function (dirPath) {
 
 console.log('cleaning up src/');
 const srcPath = path.join(__dirname.replace('/build', ''), '/src');
-clearDir(srcPath);
+if (fs.existsSync(srcPath)) {
+    clearDir(srcPath);
+} else {
+    fs.mkdir(srcPath, (err) => {
+        if (err) throw err;
+    });
+}
 
 // get openmoji.json
 console.log('reading ./input/openmoji.json');
-const index = JSON.parse(fs.readFileSync('./input/openmoji.json', {encoding: 'utf-8'}));
+const index = JSON.parse(fs.readFileSync(path.join(__dirname, 'input/openmoji.json'), {encoding: 'utf-8'}));
 
 //make icons directory
 fs.mkdir(srcPath + '/icons', (err) => {
     if (err) throw err;
 });
 
-let indexJS = '';
+let indexJS = 'return module.exports = {\n';
 console.log(`writing icon scripts ${''.toString()/*0/${index.length}*/}`);
 index.forEach(icon => {
     // get content of <HEXCODE>.svg
     let iconSvg;
     try {
-        iconSvg = fs.readFileSync(`./input/color/${icon.hexcode}.svg`, {encoding: 'utf-8'})
+        iconSvg = fs.readFileSync(path.join(__dirname, `input/color/${icon.hexcode}.svg`), {encoding: 'utf-8'})
     } catch (err) {
         return
     }
     if (!iconSvg) {
-        console.error(`./input/color/${icon.hexcode}.svg does not exist`);
+        console.error(`input/color/${icon.hexcode}.svg does not exist`);
         return;
     }
 
@@ -121,7 +127,9 @@ import React from 'react';
 const ${iconName} = (size) => {
     if (!size) size = '1.2em';
     return (
-        ${iconSvg.replace('<svg', '<svg width={size} height={size}')}
+        ${iconSvg
+        .replace('<svg', '<svg width={size} height={size}')
+        .replace(/x[a-z]+:[a-z]+="[^>]+"/g, '')/*rem namespace tags*/}
     );
 };
 
@@ -133,8 +141,12 @@ export default ${iconName};
     });
 
     // write to index 'export {default as <ICON-NAME>, default as <HEXCODE>} from <PATH/TO/ICON-SCRIPT>'
-    indexJS += `export {default as ${iconName}, default as _${icon.hexcode.replace(/-/g, '_')}} from './icons/${icon.hexcode}'\n`;
+    // indexJS += `export {default as ${iconName}, default as _${icon.hexcode.replace(/-/g, '_')}} from './icons/${icon.hexcode}'\n`;
+    // -> 'module.exports = {<ICON-NAME>: require(<PATH/TO/ICON-SCRIPT>).default}'
+    indexJS += `${iconName}: require('./icons/${icon.hexcode}').default,\n_${icon.hexcode.replace(/-/g, '_')}: require('./icons/${icon.hexcode}').default,`;
 });
+
+indexJS = indexJS.substring(0, indexJS.length) + '}';
 
 // write to index 'export function replaceEmojis'
 

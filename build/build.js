@@ -125,10 +125,9 @@ index.forEach(icon => {
 import React from 'react';
 
 const ${iconName} = (size) => {
-    if (!size) size = '1.2em';
     return (
         ${iconSvg
-        .replace('<svg', '<svg width={size} height={size}')
+        .replace('<svg', '<svg width="1.7em" height="1.7em"')
         .replace(/x[a-z]+:[a-z]+="[^>]+"/g, '')/*rem namespace tags*/}
     );
 };

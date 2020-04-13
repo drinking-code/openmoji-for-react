@@ -1,6 +1,6 @@
 {
   "name": "react-openmoji",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "openmoji for react",
   "main": "lib/index.cjs",
   "scripts": {

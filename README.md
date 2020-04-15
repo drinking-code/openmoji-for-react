@@ -2,18 +2,20 @@
 unofficial; bodged by drinking-code  
 **do not use in production**
 #### What is Openmoji for React?
-Openmoji is a collection of open source emojis. This repository lets you use these emojis in a reactjs-app easily.
+[Openmoji](https://github.com/hfg-gmuend/openmoji) is a collection of open source emojis. This repository lets you use these emojis in a reactjs-app easily.
 #### Built from (coloured) Openmoji  `v12.2.0`
 
+> Please comply with the [Openmoji Attribution Requirements](https://github.com/hfg-gmuend/openmoji#attribution-requirements)
+
 ## Installation
-```
+```shell script
 npm i react-openmoji
 ```
 
 ## Usage
 ### Automatically
 For easy and dynamic use you can replace emojis completely automatically:
-```javascript
+```jsx
 import React from 'react';
 import reactReplaceEmojis from 'react-openmoji';
 
@@ -26,7 +28,7 @@ export default App;
 
 ### Manually
 #### Via icon name
-```javascript
+```jsx
 import React from 'react';
 import { ManRaisingHand } from 'react-openmoji';
 
@@ -67,7 +69,7 @@ If a name starts with a number, a `_` is added in front of the name.
 
 #### Via unicode
 You can use the unicode of the emoji to import it. Unicodes are listed also in the [Openmoji Library](https://openmoji.org/library/).
-```javascript
+```jsx
 import React from 'react';
 import {_1F64B_200D_2642_FE0F} from 'react-openmoji';
 
@@ -79,7 +81,7 @@ export default App;
 ```
 
 You can also include all 3458 emojis:
-```javascript
+```jsx
 import React from 'react';
 import * as Emoji from 'react-openmoji';
 

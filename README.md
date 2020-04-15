@@ -1,15 +1,30 @@
 # Openmoji for React
-unofficial; bodged by drinking-code
+unofficial; bodged by drinking-code  
+**do not use in production**
 #### What is Openmoji for React?
-Openmoji is a collection of open source emojis. This repository lets you use these emojis in a react app easily.
-#### Built from Openmoji  `v12.2.0`
+Openmoji is a collection of open source emojis. This repository lets you use these emojis in a reactjs-app easily.
+#### Built from (coloured) Openmoji  `v12.2.0`
 
-### Installation
+## Installation
 ```
 npm i react-openmoji
 ```
 
-### Usage
+## Usage
+### Automatically
+For easy and dynamic use you can replace emojis completely automatically:
+```javascript
+import React from 'react';
+import reactReplaceEmojis from 'react-openmoji';
+
+const App = () => {
+    return reactReplaceEmojis(<p>Hello 🙋‍♂️ World! 🌍</p>)
+};
+
+export default App;
+```
+
+### Manually
 #### Via icon name
 ```javascript
 import React from 'react';
@@ -50,8 +65,8 @@ If a name starts with a number, a `_` is added in front of the name.
 1st place medal -> _1stPlaceMedal
 ```
 
-#### Via hexcode
-You can also import via unicode hexcode.
+#### Via unicode
+You can use the unicode of the emoji to import it. Unicodes are listed also in the [Openmoji Library](https://openmoji.org/library/).
 ```javascript
 import React from 'react';
 import {_1F64B_200D_2642_FE0F} from 'react-openmoji';

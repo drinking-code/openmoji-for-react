@@ -1,6 +1,6 @@
 {
   "name": "react-openmoji",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "description": "openmoji for react",
   "main": "lib/main.cjs",
   "scripts": {
@@ -11,6 +11,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/drinking-code/openmoji-for-react.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "keywords": [
     "openmoji",

@@ -2,6 +2,8 @@ const fs = require('fs'),
     path = require('path')
     readline = require('readline');
 
+console.log('build react-openmoji')
+
 // methods
 String.prototype.capitalize = function () {
     let string = this.split(' '),
@@ -153,5 +155,8 @@ console.log('write index.js');
 fs.writeFile(`${srcPath}/index.cjs`, indexJS, {encoding: 'utf-8'}, (err) => {
     if (err) throw err;
 });
+
+console.log('copy main.js');
+fs.copyFileSync(path.join(__dirname, 'main.cjs'), `${srcPath}/main.cjs`);
 
 console.log('transpiling icon scripts');

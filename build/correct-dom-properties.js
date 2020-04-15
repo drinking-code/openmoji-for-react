@@ -9,7 +9,8 @@ iconScriptFiles.forEach(file => {
     fs.writeFile(libPath + '/icons/' + file,
         content.replace(/"stroke-width"/g, 'strokeWidth')
             .replace(/"stroke-linejoin"/g, 'strokeLinejoin')
-            .replace(/"stroke-linecap"/g, 'strokeLinecap'),
+            .replace(/"stroke-linecap"/g, 'strokeLinecap')
+            .replace(/"stroke-miterlimit"/g, 'strokeMiterlimit'),
         {encoding: 'utf-8'}, (err) => {
         if (err) throw err;
     });

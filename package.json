@@ -2,7 +2,7 @@
   "name": "react-openmoji",
   "version": "0.2.6",
   "description": "openmoji for react",
-  "main": "lib/index.cjs",
+  "main": "lib/main.cjs",
   "scripts": {
     "install": "node build/build.js && npx babel --presets @babel/preset-react src --out-dir lib --copy-files && node build/correct-dom-properties.js"
   },

@@ -9,9 +9,16 @@ String.prototype.capitalize = function () {
     let string = this.split(' '),
         capitalised = [];
 
+    try {
     string.forEach(word => {
+        if (!word) return
         capitalised.push(word[0].toUpperCase() + word.substr(1))
     })
+    } catch (e) {
+        console.log(string)
+        string.forEach(word => console.log(word))
+        throw new Error(e);
+    }
 
     string = capitalised.join('').split('-');
     capitalised = [];
@@ -84,9 +91,11 @@ if (fs.existsSync(srcPath)) {
     });
 }
 
+const OPENMOJI_DIR = '../node_modules/openmoji'
+
 // get openmoji.json
-console.log('reading ./input/openmoji.json');
-const index = JSON.parse(fs.readFileSync(path.join(__dirname, 'input/openmoji.json'), {encoding: 'utf-8'}));
+console.log('reading openmoji.json');
+const index = JSON.parse(fs.readFileSync(path.join(__dirname, OPENMOJI_DIR, 'data/openmoji.json'), {encoding: 'utf-8'}));
 
 //make icons directory
 fs.mkdir(srcPath + '/icons', (err) => {
@@ -97,14 +106,19 @@ let indexJS = '';//'module.exports = {\n';
 console.log(`writing icon scripts ${''.toString()/*0/${index.length}*/}`);
 index.forEach(icon => {
     // get content of <HEXCODE>.svg
-    let iconSvg;
+    let iconSvg, outlineSvg;
     try {
-        iconSvg = fs.readFileSync(path.join(__dirname, `input/color/${icon.hexcode}.svg`), {encoding: 'utf-8'})
+        iconSvg = fs.readFileSync(path.join(__dirname, OPENMOJI_DIR, `color/svg/${icon.hexcode}.svg`), {encoding: 'utf-8'})
+        outlineSvg = fs.readFileSync(path.join(__dirname, OPENMOJI_DIR, `black/svg/${icon.hexcode}.svg`), {encoding: 'utf-8'})
     } catch (err) {
         return
     }
     if (!iconSvg) {
-        console.error(`input/color/${icon.hexcode}.svg does not exist`);
+        console.error(`color/svg/${icon.hexcode}.svg does not exist`);
+        return;
+    }
+    if (!outlineSvg) {
+        console.error(`black/svg/${icon.hexcode}.svg does not exist`);
         return;
     }
 
@@ -118,7 +132,7 @@ index.forEach(icon => {
     /*
         import React
         const <ICON-NAME> = (size) => {
-            if (!size) size = '1.2em';
+            if (!size) size = '1.7em';
             return (icon with size in width and height)
         }
         export default <ICON-NAME>
@@ -126,12 +140,21 @@ index.forEach(icon => {
     const iconScript = `
 import React from 'react';
 
-const ${iconName} = (size) => {
-    return (
-        ${iconSvg
-        .replace('<svg', '<svg width="1.7em" height="1.7em"')
+const ${iconName} = ({size, outline}) => {
+    if (!size) size = '1.7em';
+    if (!outline) {
+        return (
+            ${iconSvg
+            .replace('<svg', '<svg width={size} height={size}')
+            .replace(/x[a-z]+:[a-z]+="[^>]+"/g, '')/*rem namespace tags*/}
+        );
+    } else {
+        return (
+            ${outlineSvg
+        .replace('<svg', '<svg width={size} height={size}')
         .replace(/x[a-z]+:[a-z]+="[^>]+"/g, '')/*rem namespace tags*/}
-    );
+        );
+    }
 };
 
 export default ${iconName};

@@ -1,7 +1,7 @@
 import * as Emoji from './index.cjs';
 import React from 'react';
 
-const reactReplaceEmojis = function (reactChild) {
+export default function reactReplaceEmojis(reactChild, options) {
     // console.log(reactChild);
     let newReactChild;
     if (Array.isArray(reactChild.props.children)) {
@@ -10,12 +10,12 @@ const reactReplaceEmojis = function (reactChild) {
             // console.log(reactChild.props.children)
             const child = reactChild.props.children[Number(i)];
             if (React.isValidElement(child)) {
-                newChildren[i] = reactReplaceEmojis(child)
+                newChildren[i] = reactReplaceEmojis(child, options)
             } else {
                 newChildren[i] = React.cloneElement(
                     reactChild,
                     {},
-                    replaceEmojis(child)
+                    replaceEmojis(child, options)
                 )
             }
         }
@@ -28,13 +28,13 @@ const reactReplaceEmojis = function (reactChild) {
         newReactChild = React.cloneElement(
             reactChild,
             {},
-            replaceEmojis(reactChild.props.children)
+            replaceEmojis(reactChild.props.children, options)
         )
     }
     return newReactChild;
 }
 
-const replaceEmojis = function (string) {
+export function replaceEmojis(string, options) {
     if (!string) return;
     const emojis = string.match(/[\p{Emoji}\u200d\ufe0f]+/gu);
     if (!emojis) return string;
@@ -67,8 +67,10 @@ const replaceEmojis = function (string) {
         const emojiIndex = string.indexOf(emoji);
         let emojiSvg = Emoji[emojiName];
 
+        if (!options) options = {}
+
         if (emojiSvg) {
-            string[emojiIndex] = React.createElement(emojiSvg);
+            string[emojiIndex] = React.createElement(emojiSvg, options);
         } else {
             console.warn('SVG not found: ' + emojiName);
         }
@@ -78,5 +80,4 @@ const replaceEmojis = function (string) {
     return string;
 }
 
-export default reactReplaceEmojis;
 export * from './index.cjs';

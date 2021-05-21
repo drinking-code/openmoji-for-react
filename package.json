@@ -1,10 +1,11 @@
 {
   "name": "react-openmoji",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "openmoji for react",
-  "main": "lib/main.cjs",
+  "main": "lib/main.js",
   "scripts": {
-    "install": "node build/build.js && npx babel --presets @babel/preset-react src --out-dir lib --copy-files && node build/correct-dom-properties.js"
+    "postinstall": "node build/build.js && npx babel --presets @babel/preset-react src --out-dir lib --copy-files && node build/correct-dom-properties.js",
+    "repack": "rm react-openmoji-0.5.0.tgz && npm pack"
   },
   "author": "drinking-code",
   "license": "CC-BY-SA-4.0",
@@ -27,7 +28,7 @@
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
-    "openmoji": "^12.3.0",
+    "openmoji": "latest",
     "react": "^16.8.6"
   },
   "devDependencies": {

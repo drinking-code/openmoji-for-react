@@ -1,65 +1,8 @@
 const fs = require('fs'),
-    path = require('path')
-    readline = require('readline');
+    path = require('path'),
+    {String, Array} = require('./transforms')
 
 console.log('build react-openmoji')
-
-// methods
-String.prototype.capitalize = function () {
-    let string = this.split(' '),
-        capitalised = [];
-
-    try {
-    string.forEach(word => {
-        if (!word) return
-        capitalised.push(word[0].toUpperCase() + word.substr(1))
-    })
-    } catch (e) {
-        console.log(string)
-        string.forEach(word => console.log(word))
-        throw new Error(e);
-    }
-
-    string = capitalised.join('').split('-');
-    capitalised = [];
-
-    string.forEach(word => {
-        capitalised.push(word[0].toUpperCase() + word.substr(1))
-    })
-    string = capitalised.join('').split('“'); // e.g. Japanese “here” button
-    capitalised = [];
-
-    string.forEach(word => {
-        capitalised.push(word[0].toUpperCase() + word.substr(1))
-    })
-
-    return capitalised.join('');
-}
-
-String.prototype.replaceFirstNumber = function () {
-    // check if sting begins with a digit
-    if (!this.match(/^\d/)) return this
-    return '_' + this
-}
-
-String.prototype.removeParenthesis = function () {
-    return this.replace(/\([\s\S]+\)/g, '');
-}
-
-String.prototype.JSvariablise = function () {
-    return this.capitalize()
-        .replace(/:/g, '_') // e.g. waving hand: light skin tone
-        .replace(/,/g, '') // e.g. person: light skin tone, blond hair
-        .replace(/\./g, '') // e.g. Mrs. Claus
-        .replace(/’/g, '') // e.g. twelve o’clock
-        .replace(/!/g, '') // e.g. ON! arrow
-        .replace(/#/g, 'NumberSign') // e.g. keycap: #
-        .replace(/\*/g, 'Asterisk') // e.g. keycap: *
-        .replaceFirstNumber() // e.g. 1st place medal
-        .removeParenthesis() // e.g. A button (blood type)
-        .replace(/”/g, '') // e.g. Japanese “here” button
-        .replace(/&/g, ''); // e.g. flag: Bosnia & Herzegovina
-}
 
 // cleanup /src
 clearDir = function (dirPath) {
@@ -91,7 +34,7 @@ if (fs.existsSync(srcPath)) {
     });
 }
 
-const OPENMOJI_DIR = '../node_modules/openmoji'
+const OPENMOJI_DIR = '../../openmoji'
 
 // get openmoji.json
 console.log('reading openmoji.json');
@@ -102,8 +45,9 @@ fs.mkdir(srcPath + '/icons', (err) => {
     if (err) throw err;
 });
 
-let indexJS = '';//'module.exports = {\n';
-console.log(`writing icon scripts ${''.toString()/*0/${index.length}*/}`);
+let indexJS = '';
+const usedNames = []
+console.log(`writing icon scripts`);
 index.forEach(icon => {
     // get content of <HEXCODE>.svg
     let iconSvg, outlineSvg;
@@ -123,10 +67,12 @@ index.forEach(icon => {
     }
 
     let iconName = icon.annotation.JSvariablise();
-    //handle duplicate (and multiples) names
-    const searchName = new RegExp(`default as ${iconName},`);
-    const searchNameCount = (indexJS.match(searchName) || []).length;
-    if (searchNameCount > 0) iconName += (searchNameCount + 1);
+    // handle duplicate (and multiples) names
+    if (usedNames.includes(iconName)) {
+        const occurrences = usedNames.count(new RegExp(`^${iconName}\\d*$`))
+        iconName = iconName + (Number(occurrences) + 1)
+    }
+    usedNames.push(iconName)
 
     // write <ICON-SCRIPT>.js with:
     /*
@@ -145,8 +91,8 @@ const ${iconName} = ({size, outline}) => {
     if (!outline) {
         return (
             ${iconSvg
-            .replace('<svg', '<svg width={size} height={size}')
-            .replace(/x[a-z]+:[a-z]+="[^>]+"/g, '')/*rem namespace tags*/}
+        .replace('<svg', '<svg width={size} height={size}')
+        .replace(/x[a-z]+:[a-z]+="[^>]+"/g, '')/*rem namespace tags*/}
         );
     } else {
         return (
@@ -164,22 +110,21 @@ export default ${iconName};
         if (err) throw err;
     });
 
+    // console.log(iconName, icon.annotation, icon.hexcode)
+
     // write to index 'export {default as <ICON-NAME>, default as <HEXCODE>} from <PATH/TO/ICON-SCRIPT>'
     indexJS += `export {default as ${iconName}, default as _${icon.hexcode.replace(/-/g, '_')}} from './icons/${icon.hexcode}'\n`;
     // -> 'module.exports = {<ICON-NAME>: require(<PATH/TO/ICON-SCRIPT>).default}'
-    // indexJS += `${iconName}: require('./icons/${icon.hexcode}').default,\n_${icon.hexcode.replace(/-/g, '_')}: require('./icons/${icon.hexcode}').default,\n`;
 });
-
-// indexJS = indexJS.slice(0, -2) + '}';
 
 // write to index 'export function replaceEmojis'
 
 console.log('write index.js');
-fs.writeFile(`${srcPath}/index.cjs`, indexJS, {encoding: 'utf-8'}, (err) => {
+fs.writeFile(`${srcPath}/index.js`, indexJS, {encoding: 'utf-8'}, (err) => {
     if (err) throw err;
 });
 
 console.log('copy main.js');
-fs.copyFileSync(path.join(__dirname, 'main.cjs'), `${srcPath}/main.cjs`);
+fs.copyFileSync(path.join(__dirname, 'main.js'), `${srcPath}/main.js`);
 
-console.log('transpiling icon scripts');
+console.log('transpiling icon scripts...');

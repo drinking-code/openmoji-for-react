@@ -1,4 +1,4 @@
-import * as Emoji from './index.cjs';
+import * as Emoji from './index.js';
 import React from 'react';
 
 export default function reactReplaceEmojis(reactChild, options) {
@@ -80,4 +80,4 @@ export function replaceEmojis(string, options) {
     return string;
 }
 
-export * from './index.cjs';
+export * from './index.js';

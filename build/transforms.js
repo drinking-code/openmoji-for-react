@@ -59,7 +59,6 @@ Array.prototype.count = function (regex) {
     this.forEach(el => {
         if (!(el.match(regex) || []).length > 0) return
         count++
-        console.log(el.match(regex))
     })
     return count
 }

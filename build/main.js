@@ -1,13 +1,13 @@
-import * as Emoji from './index.js';
-import React from 'react';
+const React = require('react')
+const Emoji = require('./index');
+require('./default-svg.css')
 
-export default function reactReplaceEmojis(reactChild, options) {
-    // console.log(reactChild);
+function reactReplaceEmojis(reactChild, options) {
     let newReactChild;
     if (Array.isArray(reactChild.props.children)) {
         let newChildren = [];
         for (let i in reactChild.props.children) {
-            // console.log(reactChild.props.children)
+            if (!reactChild.props.children.hasOwnProperty(i)) continue
             const child = reactChild.props.children[Number(i)];
             if (React.isValidElement(child)) {
                 newChildren[i] = reactReplaceEmojis(child, options)
@@ -34,7 +34,11 @@ export default function reactReplaceEmojis(reactChild, options) {
     return newReactChild;
 }
 
-export function replaceEmojis(string, options) {
+function replaceEmojis(string, options) {
+    options = {
+        size: typeof options?.size === 'string' ? options.size : undefined,
+        outline: typeof options?.outline === 'boolean' ? options.outline : undefined
+    }
     if (!string) return;
     const emojis = string.match(/[\p{Emoji}\u200d\ufe0f]+/gu);
     if (!emojis) return string;
@@ -42,32 +46,28 @@ export function replaceEmojis(string, options) {
     string = string.split(/([\p{Emoji}\u200d\ufe0f]+)/gu);
 
     // replace emojis with SVGs
-    emojis.forEach(emoji => {
+    emojis.forEach((emoji, i) => {
         // get the char codes of the emojis
         let unicode = "";
 
         function getNextChar(pointer) {
             const subUnicode = emoji.codePointAt(pointer);
-            // console.log(emoji, pointer, subUnicode);
             if (!subUnicode) return;
             if (!(subUnicode >= 56320 && subUnicode <= 57343)) { // 56320-57343: Low Surrogates Character
-                // console.log(subUnicode, subUnicode.toString(16));
                 unicode += '-' + subUnicode.toString(16);
-                // getNextChar(++pointer);
             }
             getNextChar(++pointer);
         }
 
         getNextChar(0);
         unicode = unicode.substr(1);
-        // console.log(unicode.toUpperCase());
 
-        const emojiName = `_${unicode.toUpperCase().replace(/-/g, '_')}`;
+        const emojiName = `U_${unicode.toUpperCase().replace(/-/g, '_')}`;
 
         const emojiIndex = string.indexOf(emoji);
         let emojiSvg = Emoji[emojiName];
 
-        if (!options) options = {}
+        options.key = i
 
         if (emojiSvg) {
             string[emojiIndex] = React.createElement(emojiSvg, options);
@@ -80,4 +80,10 @@ export function replaceEmojis(string, options) {
     return string;
 }
 
-export * from './index.js';
+reactReplaceEmojis.replaceEmojis = replaceEmojis
+for (const key in Emoji) {
+    if (!Emoji.hasOwnProperty(key)) continue
+    reactReplaceEmojis[key] = Emoji[key]
+}
+
+module.exports = reactReplaceEmojis

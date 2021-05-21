@@ -29,7 +29,8 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
     "openmoji": "latest",
-    "react": "^16.8.6"
+    "react": "^16.8.6",
+    "react-dynamic-import": "^1.1.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

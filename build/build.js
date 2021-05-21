@@ -2,10 +2,7 @@ const fs = require('fs'),
     path = require('path'),
     {String, Array} = require('./transforms')
 
-console.log('build react-openmoji')
-
-// cleanup /src
-clearDir = function (dirPath) {
+const clearDir = function (dirPath) {
     let files;
     try {
         files = fs.readdirSync(dirPath);
@@ -24,7 +21,7 @@ clearDir = function (dirPath) {
     });
 };
 
-console.log('cleaning up src/');
+// cleanup /src if necessary
 const srcPath = path.join(__dirname.replace('/build', ''), '/src');
 if (fs.existsSync(srcPath)) {
     clearDir(srcPath);
@@ -35,36 +32,32 @@ if (fs.existsSync(srcPath)) {
 }
 
 const OPENMOJI_DIR = '../../openmoji'
-
 // get openmoji.json
-console.log('reading openmoji.json');
-const index = JSON.parse(fs.readFileSync(path.join(__dirname, OPENMOJI_DIR, 'data/openmoji.json'), {encoding: 'utf-8'}));
+const index = JSON.parse(fs.readFileSync(path.join(__dirname, OPENMOJI_DIR, 'data/openmoji.json')).toString());
 
-//make icons directory
+// make icons directory
 fs.mkdir(srcPath + '/icons', (err) => {
     if (err) throw err;
 });
 
-let indexJS = '';
+let indexJS = `const DI = require('react-dynamic-import')
+module.exports = {\n`;
 const usedNames = []
-console.log(`writing icon scripts`);
+
 index.forEach(icon => {
     // get content of <HEXCODE>.svg
     let iconSvg, outlineSvg;
     try {
-        iconSvg = fs.readFileSync(path.join(__dirname, OPENMOJI_DIR, `color/svg/${icon.hexcode}.svg`), {encoding: 'utf-8'})
-        outlineSvg = fs.readFileSync(path.join(__dirname, OPENMOJI_DIR, `black/svg/${icon.hexcode}.svg`), {encoding: 'utf-8'})
+        iconSvg = fs.readFileSync(path.join(__dirname, OPENMOJI_DIR, `color/svg/${icon.hexcode}.svg`)).toString()
+        outlineSvg = fs.readFileSync(path.join(__dirname, OPENMOJI_DIR, `black/svg/${icon.hexcode}.svg`)).toString()
     } catch (err) {
         return
     }
-    if (!iconSvg) {
-        console.error(`color/svg/${icon.hexcode}.svg does not exist`);
-        return;
-    }
-    if (!outlineSvg) {
-        console.error(`black/svg/${icon.hexcode}.svg does not exist`);
-        return;
-    }
+
+    if (!iconSvg)
+        return console.error(`color/svg/${icon.hexcode}.svg does not exist`);
+    if (!outlineSvg)
+        return console.error(`black/svg/${icon.hexcode}.svg does not exist`);
 
     let iconName = icon.annotation.JSvariablise();
     // handle duplicate (and multiples) names
@@ -74,57 +67,51 @@ index.forEach(icon => {
     }
     usedNames.push(iconName)
 
-    // write <ICON-SCRIPT>.js with:
-    /*
-        import React
-        const <ICON-NAME> = (size) => {
-            if (!size) size = '1.7em';
-            return (icon with size in width and height)
-        }
-        export default <ICON-NAME>
-    */
-    const iconScript = `
-import React from 'react';
+    // write <ICON-SCRIPT>.js
+    const iconScript = `\
+const React = require('react')
 
 const ${iconName} = ({size, outline}) => {
-    if (!size) size = '1.7em';
+    if (!size) size = '1.5em';
     if (!outline) {
         return (
-            ${iconSvg
-        .replace('<svg', '<svg width={size} height={size}')
-        .replace(/x[a-z]+:[a-z]+="[^>]+"/g, '')/*rem namespace tags*/}
+            ${iconSvg.replace(
+                '<svg id="emoji"',
+        '<svg width={size} height={size} className="openmoji"'
+    )
+        .replace(/x[a-z]+:[a-z]+="[^>]+"/g, '')/*rem namespace tags*/
+        .replace(/\n */g, '')}
         );
     } else {
         return (
-            ${outlineSvg
-        .replace('<svg', '<svg width={size} height={size}')
-        .replace(/x[a-z]+:[a-z]+="[^>]+"/g, '')/*rem namespace tags*/}
+            ${outlineSvg.replace(
+        '<svg id="emoji"',
+        '<svg width={size} height={size} className="openmoji"'
+    )
+        .replace(/x[a-z]+:[a-z]+="[^>]+"/g, '')/*rem namespace tags*/
+        .replace(/\n +/g, '')}
         );
     }
 };
 
-export default ${iconName};
-    `;
+module.exports = ${iconName};`;
+
     // create icon script file
-    fs.writeFile(`${srcPath}/icons/${icon.hexcode}.js`, iconScript, {encoding: 'utf-8'}, (err) => {
+    fs.writeFile(`${srcPath}/icons/${icon.hexcode}.js`, iconScript, (err) => {
         if (err) throw err;
     });
 
-    // console.log(iconName, icon.annotation, icon.hexcode)
-
     // write to index 'export {default as <ICON-NAME>, default as <HEXCODE>} from <PATH/TO/ICON-SCRIPT>'
-    indexJS += `export {default as ${iconName}, default as _${icon.hexcode.replace(/-/g, '_')}} from './icons/${icon.hexcode}'\n`;
-    // -> 'module.exports = {<ICON-NAME>: require(<PATH/TO/ICON-SCRIPT>).default}'
+    indexJS += `${iconName}: DI({loader: () => import('./icons/${icon.hexcode}')}),\n`
+    indexJS += `U_${icon.hexcode.replace(/-/g, '_')}: DI({loader: () => import('./icons/${icon.hexcode}')}),\n`
 });
 
-// write to index 'export function replaceEmojis'
+indexJS += '}';
 
-console.log('write index.js');
-fs.writeFile(`${srcPath}/index.js`, indexJS, {encoding: 'utf-8'}, (err) => {
+// write to index 'export function replaceEmojis'
+fs.writeFile(`${srcPath}/index.js`, indexJS, (err) => {
     if (err) throw err;
 });
 
-console.log('copy main.js');
 fs.copyFileSync(path.join(__dirname, 'main.js'), `${srcPath}/main.js`);
-
-console.log('transpiling icon scripts...');
+fs.copyFileSync(path.join(__dirname, 'default-svg.css'), `${srcPath}/default-svg.css`);

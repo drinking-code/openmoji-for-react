@@ -1,7 +1,6 @@
 # Openmoji for React
 
-unofficial; bodged by drinking-code  
-not optimized for production use
+unofficial; bodged by drinking-code
 
 1. [What is Openmoji for React?](#what-is-openmoji-for-react)
 2. [Installation](#installation)
@@ -69,7 +68,7 @@ export default App;
 
 #### `replaceEmojis(string[, options])`
 
-Is the sting equivalent to `reactReplaceEmojis`. Use this if you only want to replace emojis within a string.
+Is the string equivalent to `reactReplaceEmojis`. Use this if you just want to replace emojis within a string.
 
 ```jsx
 import React from 'react';
@@ -97,15 +96,15 @@ const App = () => {
 export default App;
 ```
 
-Icon names from the [Openmoji Library](https://openmoji.org/library/) are converted into camelCase,
+Icon names from the [Openmoji Library](https://openmoji.org/library/) are converted into PascalCase,
 so `man raising hand` translates to `ManRaisingHand`.
 
 ##### Additions
 
-`:` are replaced with `_`.
+`:` is replaced with `_`.
 
 ```
-waving hand: light skin tone -> WavingHand_LightSkinTone
+waving hand: light skin tone  ->  WavingHand_LightSkinTone
 ```
 
 `,`, `.`, `’`, `!`, `”`, and `&` are removed.
@@ -122,8 +121,8 @@ flag: Bosnia & Herzegovina          -> Flag_BosniaHerzegovina
 `#` is replaced with `NumberSign`, `*` is replaced with `Asterisk`.
 
 ```
-keycap: # -> Keycap_NumberSign
-keycap: * -> Keycap_Asterisk
+keycap: #  ->  Keycap_NumberSign
+keycap: *  ->  Keycap_Asterisk
 ```
 
 Everything in brackets is removed.
@@ -138,9 +137,11 @@ If a name starts with a number, a `_` is added in front of the name.
 1st place medal -> _1stPlaceMedal
 ```
 
+> **Note:** Some names may appear more than once in the Library (i.e. some emoji variations). Those duplicates are renamed to `DuplicatedName2`, `DuplicatedName3` etc.
+
 #### Via unicode
 
-You can use the unicode of the emoji to import it. Unicodes are listed also in
+You can use the unicode of the emoji to import it. Unicodes are also listed in
 the [Openmoji Library](https://openmoji.org/library/). All unicode names have the `U_` prefix in `react-openmoji`.
 
 ```jsx
@@ -154,7 +155,7 @@ const App = () => {
 export default App;
 ```
 
-You can also include all 3914 emojis:
+> **Fun fact:** Importing all 3914 emojis at once is actually just as fast as the other methods because all emojis are dynamically loaded:
 
 ```jsx
 import React from 'react';
@@ -169,7 +170,7 @@ export default App;
 
 #### Attributes
 
-In all manual cases you can use two attributes:
+With all manual methods you can use two attributes:
 
 |Field|Type|Description|Default|  
 |---|---|---|---|  

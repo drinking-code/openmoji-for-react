@@ -2,37 +2,35 @@ import React from 'react'
 import * as Emoji from './index'
 import './default-svg.css'
 
-function reactReplaceEmojis(reactChild, options) {
-    let newReactChild;
-    if (Array.isArray(reactChild.props.children)) {
-        let newChildren = [];
-        for (let i in reactChild.props.children) {
-            if (!reactChild.props.children.hasOwnProperty(i)) continue
-            const child = reactChild.props.children[Number(i)];
-            if (React.isValidElement(child)) {
-                newChildren[i] = reactReplaceEmojis(child, options)
-            } else {
-                newChildren[i] = React.cloneElement(
-                    reactChild,
-                    {},
-                    replaceEmojis(child, options)
-                )
-            }
+export default function reactReplaceEmojis(reactElement, options) {
+    // shortcut -> no children means nothing to replace
+    if (!reactElement.props.children) return reactElement
+    let newReactElement,
+        hasMultipleChildren = Array.isArray(reactElement.props.children),
+        newChildren = []
+
+    // if element has multiple children call the recursive function once for each
+    if (hasMultipleChildren) {
+        for (let i in reactElement.props.children) {
+            if (!reactElement.props.children.hasOwnProperty(i)) continue
+            const child = reactElement.props.children[Number(i)];
+            newChildren[i] = _applyCorrectReplace(child, options)
         }
-        newReactChild = React.cloneElement(
-            reactChild,
-            {},
-            newChildren
-        );
-    } else {
-        newReactChild = React.cloneElement(
-            reactChild,
-            {},
-            replaceEmojis(reactChild.props.children, options)
-        )
-    }
-    return newReactChild;
+    } else // if element has only one child call the recursive function directly
+        newChildren = _applyCorrectReplace(reactElement.props.children, options)
+
+    newReactElement = React.cloneElement(
+        reactElement,
+        {},
+        newChildren
+    );
+    return newReactElement;
 }
+
+const _applyCorrectReplace = (child, options) =>
+    React.isValidElement(child)
+        ? reactReplaceEmojis(child, options)
+        : replaceEmojis(child, options)
 
 export function replaceEmojis(string, options) {
     if (!string) return;

@@ -155,7 +155,7 @@ const App = () => {
 export default App;
 ```
 
-> **Fun fact:** Importing all 3914 emojis at once is actually just as fast as the other methods because all emojis are dynamically loaded:
+> **Fun fact:** Importing all 3678 emojis at once is actually just as fast as the other methods because all emojis are dynamically loaded:
 
 ```jsx
 import React from 'react';

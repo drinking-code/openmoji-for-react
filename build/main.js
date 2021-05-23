@@ -1,6 +1,6 @@
-const React = require('react')
-const Emoji = require('./index');
-require('./default-svg.css')
+import React from 'react'
+import * as Emoji from './index'
+import './default-svg.css'
 
 function reactReplaceEmojis(reactChild, options) {
     let newReactChild;
@@ -34,7 +34,7 @@ function reactReplaceEmojis(reactChild, options) {
     return newReactChild;
 }
 
-function replaceEmojis(string, options) {
+export function replaceEmojis(string, options) {
     if (!string) return;
     let array = [string]
 
@@ -43,12 +43,15 @@ function replaceEmojis(string, options) {
         outline: typeof options?.outline === 'boolean' ? options.outline : undefined
     };
 
-    // matches all emojis       matches all attached components          matches that is joined (zwj)
-    // \p{Extended_Pictographic}[\u{1f3fb}-\u{1f3ff}\u{1f9b0}-\u{1f9b3}]?(\u200d.)?\ufe0f?(?!\ufe0e)
-    //                                                                             matches only non-"text style" emojis
+    /*
+    * matches all emojis       matches all attached components
+    * \p{Extended_Pictographic}[\u{1f3fb}-\u{1f3ff}\u{1f9b0}-\u{1f9b3}]?                        un-matches "text style"
+    * (\u200d\p{Extended_Pictographic}[\u{1f3fb}-\u{1f3ff}\u{1f9b0}-\u{1f9b3}]?)*[\u2640\u2642]?\ufe0f?(?!\ufe0e)/gu
+    * matches all joined (ZWJ) emojis with all attached components               matches attached gender
+    */
 
-    const regex = /\p{Extended_Pictographic}[\u{1f3fb}-\u{1f3ff}\u{1f9b0}-\u{1f9b3}]?(\u200d.)?\ufe0f?(?!\ufe0e)/gu;
-    let m;
+    const regex = /\p{Extended_Pictographic}[\u{1f3fb}-\u{1f3ff}\u{1f9b0}-\u{1f9b3}]?(\u200d\p{Extended_Pictographic}[\u{1f3fb}-\u{1f3ff}\u{1f9b0}-\u{1f9b3}]?)*[\u2640\u2642]?\ufe0f?(?!\ufe0e)/gu;
+    let m, j = 0;
 
     while ((m = regex.exec(string)) !== null) {
         // This is necessary to avoid infinite loops with zero-width matches
@@ -71,6 +74,8 @@ function replaceEmojis(string, options) {
         }
 
         let emojiSvg = Emoji[emojiName];
+        options.key = j
+        j++
         if (emojiSvg) {
             // gets last string ['String with {Emoji} and {Emoji} in it'] -> 'String with {Emoji} and {Emoji} in it'
             let workingString = array.pop()
@@ -92,10 +97,4 @@ function replaceEmojis(string, options) {
     return array;
 }
 
-reactReplaceEmojis.replaceEmojis = replaceEmojis
-for (const key in Emoji) {
-    if (!Emoji.hasOwnProperty(key)) continue
-    reactReplaceEmojis[key] = Emoji[key]
-}
-
-module.exports = reactReplaceEmojis
+export * from './index';

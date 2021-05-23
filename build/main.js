@@ -35,49 +35,61 @@ function reactReplaceEmojis(reactChild, options) {
 }
 
 function replaceEmojis(string, options) {
+    if (!string) return;
+    let array = [string]
+
     options = {
         size: typeof options?.size === 'string' ? options.size : undefined,
         outline: typeof options?.outline === 'boolean' ? options.outline : undefined
-    }
-    if (!string) return;
-    const emojis = string.match(/[\p{Emoji}\u200d\ufe0f]+/gu);
-    if (!emojis) return string;
+    };
 
-    string = string.split(/([\p{Emoji}\u200d\ufe0f]+)/gu);
+    // matches all emojis       matches all attached components          matches that is joined (zwj)
+    // \p{Extended_Pictographic}[\u{1f3fb}-\u{1f3ff}\u{1f9b0}-\u{1f9b3}]?(\u200d.)?\ufe0f?(?!\ufe0e)
+    //                                                                             matches only non-"text style" emojis
 
-    // replace emojis with SVGs
-    emojis.forEach((emoji, i) => {
-        // get the char codes of the emojis
-        let unicode = "";
+    const regex = /\p{Extended_Pictographic}[\u{1f3fb}-\u{1f3ff}\u{1f9b0}-\u{1f9b3}]?(\u200d.)?\ufe0f?(?!\ufe0e)/gu;
+    let m;
 
-        function getNextChar(pointer) {
-            const subUnicode = emoji.codePointAt(pointer);
-            if (!subUnicode) return;
-            if (!(subUnicode >= 56320 && subUnicode <= 57343)) { // 56320-57343: Low Surrogates Character
-                unicode += '-' + subUnicode.toString(16);
-            }
-            getNextChar(++pointer);
+    while ((m = regex.exec(string)) !== null) {
+        // This is necessary to avoid infinite loops with zero-width matches
+        if (m.index === regex.lastIndex) {
+            regex.lastIndex++;
         }
 
-        getNextChar(0);
-        unicode = unicode.substr(1);
+        // find the code for the emoji
+        let emojiName = 'U', done = false
+        for (let i = 0; !done; i++) {
+            let subUnicode = m[0].codePointAt(i)
+            // dismiss low surrogates characters (56320-57343)
+            if ((subUnicode >= 56320 && subUnicode <= 57343)) continue
+            emojiName += '_' + subUnicode?.toString(16).toUpperCase()
 
-        const emojiName = `U_${unicode.toUpperCase().replace(/-/g, '_')}`;
+            // check if is done: if this hexcode is longer than 4, check the next but one codepoint
+            done = m[0].codePointAt(i)?.toString(16).length > 4
+                ? !m[0].codePointAt(i + 2)
+                : !m[0].codePointAt(i + 1)
+        }
 
-        const emojiIndex = string.indexOf(emoji);
         let emojiSvg = Emoji[emojiName];
-
-        options.key = i
-
         if (emojiSvg) {
-            string[emojiIndex] = React.createElement(emojiSvg, options);
+            // gets last string ['String with {Emoji} and {Emoji} in it'] -> 'String with {Emoji} and {Emoji} in it'
+            let workingString = array.pop()
+            // 'String with {Emoji} and {Emoji} in it' -> ['String with ', ' and ', ' in it']
+            workingString = workingString.split(m[0])
+            // [] -> ['String with ']
+            // ['String with ', ' and ', ' in it'] -> [' and ', ' in it']
+            array.push(workingString.shift())
+            // ['String with '] -> ['String with ', <Emoji>]
+            array.push(React.createElement(emojiSvg, options))
+            // [' and ', ' in it'] -> ' and {Emoji} in it'
+            // ['String with ', <Emoji>] -> ['String with ', <Emoji>, ' and {Emoji} in it']
+            array.push(workingString.join(m[0]))
         } else {
             console.warn('SVG not found: ' + emojiName);
         }
-    })
+    }
 
-    // return converted react HTML
-    return string;
+    return array;
 }
 
 reactReplaceEmojis.replaceEmojis = replaceEmojis

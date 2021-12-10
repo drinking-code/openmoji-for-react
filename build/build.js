@@ -32,6 +32,7 @@ if (fs.existsSync(srcPath)) {
 }
 
 const OPENMOJI_DIR = '../../openmoji'
+// const OPENMOJI_DIR = '../node_modules/openmoji'
 // get openmoji.json
 const index = JSON.parse(fs.readFileSync(path.join(__dirname, OPENMOJI_DIR, 'data/openmoji.json')).toString());
 
@@ -79,7 +80,7 @@ const ${iconName} = ({size, outline}) => {
                 '<svg id="emoji"',
         '<svg width={size} height={size} className="openmoji"'
     )
-        .replace(/x[a-z]+:[a-z]+="[^>]+"/g, '')/*rem namespace tags*/
+        .replace(/[a-z]+:[a-z]+="[^>"]+"/g, '')/*rem namespace tags*/
         .replace(/\n */g, '')}
         );
     } else {
@@ -88,7 +89,7 @@ const ${iconName} = ({size, outline}) => {
         '<svg id="emoji"',
         '<svg width={size} height={size} className="openmoji"'
     )
-        .replace(/x[a-z]+:[a-z]+="[^>]+"/g, '')/*rem namespace tags*/
+        .replace(/[a-z]+:[a-z]+="[^>"]+"/g, '')/*rem namespace tags*/
         .replace(/\n +/g, '')}
         );
     }

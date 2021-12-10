@@ -10,7 +10,9 @@ iconScriptFiles.forEach(file => {
         content.replace(/"stroke-width"/g, 'strokeWidth')
             .replace(/"stroke-linejoin"/g, 'strokeLinejoin')
             .replace(/"stroke-linecap"/g, 'strokeLinecap')
-            .replace(/"stroke-miterlimit"/g, 'strokeMiterlimit'),
+            .replace(/"stroke-miterlimit"/g, 'strokeMiterlimit')
+            .replace(/"fill-rule"/g, 'fillRule')
+            .replace(/"clip-rule"/g, 'clipRule'),
         {encoding: 'utf-8'}, (err) => {
         if (err) throw err;
     });

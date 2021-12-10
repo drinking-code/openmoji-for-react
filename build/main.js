@@ -35,10 +35,11 @@ const _applyCorrectReplace = (child, options) =>
 export function replaceEmojis(string, options) {
     if (!string) return;
     let array = [string]
-
+    if (!options)
+        options = {}
     options = {
-        size: typeof options?.size === 'string' ? options.size : undefined,
-        outline: typeof options?.outline === 'boolean' ? options.outline : undefined
+        size: typeof options.size === 'string' ? options.size : undefined,
+        outline: typeof options.outline === 'boolean' ? options.outline : undefined
     };
 
     /*
@@ -48,7 +49,7 @@ export function replaceEmojis(string, options) {
     * matches all joined (ZWJ) emojis with all attached components               matches attached gender
     */
 
-    const regex = /\p{Extended_Pictographic}[\u{1f3fb}-\u{1f3ff}\u{1f9b0}-\u{1f9b3}]?(\u200d\p{Extended_Pictographic}[\u{1f3fb}-\u{1f3ff}\u{1f9b0}-\u{1f9b3}]?)*[\u2640\u2642]?\ufe0f?(?!\ufe0e)/gu;
+    const regex = /\p{Extended_Pictographic}[\u{1f3fb}-\u{1f3ff}\u{1f9b0}-\u{1f9b3}]?\ufe0f?(\u200d\p{Extended_Pictographic}[\u{1f3fb}-\u{1f3ff}\u{1f9b0}-\u{1f9b3}]?\ufe0f?)*[\u2640\u2642]?\ufe0f?(?!\ufe0e)/gu;
     let m, j = 0;
 
     while ((m = regex.exec(string)) !== null) {
@@ -63,10 +64,11 @@ export function replaceEmojis(string, options) {
             let subUnicode = m[0].codePointAt(i)
             // dismiss low surrogates characters (56320-57343)
             if ((subUnicode >= 56320 && subUnicode <= 57343)) continue
-            emojiName += '_' + subUnicode?.toString(16).toUpperCase()
+            if (subUnicode)
+                emojiName += '_' + subUnicode.toString(16).toUpperCase()
 
             // check if is done: if this hexcode is longer than 4, check the next but one codepoint
-            done = m[0].codePointAt(i)?.toString(16).length > 4
+            done = m[0].codePointAt(i).toString(16).length > 4
                 ? !m[0].codePointAt(i + 2)
                 : !m[0].codePointAt(i + 1)
         }

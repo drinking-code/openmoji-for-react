@@ -1,6 +1,6 @@
 {
   "name": "react-openmoji",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "openmoji for react",
   "main": "lib/main.js",
   "scripts": {
@@ -12,9 +12,6 @@
     "type": "git",
     "url": "git+https://github.com/drinking-code/openmoji-for-react.git"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "keywords": [
     "openmoji",
     "react"
@@ -24,11 +21,11 @@
   },
   "homepage": "https://github.com/drinking-code/openmoji-for-react#readme",
   "dependencies": {
-    "@babel/cli": "^7.14.3",
-    "@babel/core": "^7.14.3",
-    "@babel/preset-react": "^7.13.13",
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
     "openmoji": "latest",
-    "react": "^16.8.6",
+    "react": "^17.0.2",
     "react-dynamic-import": "^1.1.5"
   }
 }
